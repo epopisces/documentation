@@ -1,0 +1,30 @@
+#*** Creating new key pair  ***#
+# openssl req -newkey rsa:2048 -nodes -keyout example.key -config example.cnf -out example.csr
+#*** With existing key pair ***#
+# openssl req -new -config example.cnf -key example.key -out example.csr
+
+[req]
+prompt              = no
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+req_extensions      = req_ext
+
+[req_distinguished_name]
+C   = US
+ST  = Azure
+L   = EastUS2
+O   = MyOrg
+OU  = MyDept
+CN  = example.subdom.domain.net
+emailAddress = example@domain.com
+
+[ req_ext ]
+# Extensions to add to a certificate request
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = example.subdom.domain.net
+DNS.2 = npd.example.subdom.domain.net
+DNS.3 = example
+DNS.4 = npd.example
+IP.1 = 192.168.1.1
