@@ -1,48 +1,46 @@
-:::mermaid
-flowchart TB
-  Input
-  subgraph s1[" "]
-    Input --> Process
-    subgraph s2 [" "]
-      subgraph Process
-        direction LR
-        A --> B --> C --> A
-      end
-      Process --> Output
-    end
-	end
-  Output --> Input
-
-classDef class1 fill: black, stroke: black
-class s1,s2 class1
-style Process fill: dgrey, stroke: dgrey
-:::
 
 :::mermaid
 flowchart TB
   subgraph s1[" "]
     subgraph Bootstrap
-      platdef["Platform Definition (code)"]
-      platids[Platform Identities]
-      platdeploy[Workstation Build Process]
+      platdef["Platform definition (code)"]
+      platids[Platform identities]
+      platdeploy[Workstation build process]
     end
     subgraph autplat[Automation Platform]
-      pipecode["Core Pipeline Definition (code)"]
-      pipedeps["Core Pipeline Dependencies (modules)"]
-      pipeids[Pipeline Integrations]
-      pipeinfra[Build Agents/Compute]
+      pipecode["Core pipeline definition (code)"]
+      pipedeps["Core pipeline dependencies (modules)"]
+      pipeids[Pipeline integrations]
+      pipeinfra[Pipeline compute/build pools, agents]
+      subgraph autplattest[Pipeline tests]
+        pipevalidation[Automated validation]
+      end
     end
     subgraph infrapip[Infrastructure Pipeline]
-      iacpipecode["IaC Pipeline Definition (code)"]
-      iacpipedeps["IaC Pipeline Dependencies (modules)"]
+      iacpipecode["IaC pipeline definition (code)"]
+      iacpipedeps["IaC pipeline dependencies (modules)"]
+      subgraph iactest[IaC tests]
+        tflint
+        terratest
+      end
     end
     subgraph bldpip[Application Build Pipeline]
-      bldpipecode["Build Pipeline Definition (code)"]
-      bldpipedeps["Build Pipeline Dependencies (modules)"]
+      bldpipecode["Build pipeline definition (code)"]
+      bldpipedeps["Build pipeline dependencies (modules)"]
+      subgraph bldtest[Build tests]
+        codescan[Code scanning]
+        unittest[Unit testing]
+      end
+        artifact[Artifact management]
+        depmgmt[Dependency management]
+      
     end
-    subgraph dpypip[Application Deploy Pipeline]
-      dpypipecode["Deploy Pipeline Definition (code)"]
-      dpypipedeps["Deploy Pipeline Dependencies (modules)"]
+    subgraph dpypip[Application deploy pipeline]
+      dpypipecode["Deploy pipeline definition (code)"]
+      dpypipedeps["Deploy pipeline dependencies (modules)"]
+      subgraph dpytest[Deploy tests]
+        dpyvalidation[Automated validation]
+      end
     end
 	end
 
