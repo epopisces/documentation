@@ -49,3 +49,40 @@ class s1 class1
 classDef class2 fill: dgrey, stroke: dgrey
 class Bootstrap,autplat,infrapip,bldpip,dpypip class2
 :::
+
+# Bootstrap
+
+## Role
+* Deploy pipeline from scratch, solving chicken-and-egg
+
+# Automation Pipeline
+
+## Role
+* single endpoint for automation
+  * 'routes' to other pipeline steps as needed
+* handles caching
+* handles pipeline compute (build pools, etc)
+* handles core naming convention/associations (eg for a given project with all elements involved, creates consistency across infra, app artifact, deployment, etc)
+* provides common modules for universal integrations, eg documentation output
+* when changes are made to pipeline, includes testing (via series of fast builds to validate functioning of pipeline in variety of use cases)
+
+# Infrastructure Pipeline
+aka IaC
+
+## Role
+Extends Automation Pipeline, adding the following capabilities
+* steps to provision infrastructure in Azure
+
+# App Build Pipeline
+
+## Role
+Extends Automation Pipeline, adding the following capabilities
+* unit testing
+* code scanning
+* artifact management
+* dependency management
+
+# App Deploy Pipeline
+
+## Role
+* s
